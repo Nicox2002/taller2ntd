@@ -80,6 +80,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS -->
         <script src="js/scripts.js"></script>
+        <!-- Script para guardar publis -->
         <script>
             document.getElementById("publicationForm").addEventListener("submit", function(event) {
                 event.preventDefault(); // Evita que la página se recargue
@@ -91,6 +92,7 @@
                     title: title,
                     content: content,
                     date: new Date().toLocaleDateString(),
+                    userPost: true // 🔹 Identificamos que esta publicación fue hecha por el usuario
                 };
         
                 // Obtener publicaciones anteriores y agregar la nueva

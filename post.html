@@ -177,6 +177,57 @@
                 }
             });
         </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                let postsContainer = document.getElementById("postsContainer");
+                let posts = JSON.parse(localStorage.getItem("posts")) || [];
+        
+                // 🔹 Agregamos las publicaciones predefinidas solo si no están en localStorage
+                let defaultPosts = [
+                    {
+                        title: "Los estudiantes de la Konrad Lorenz viven una jornada de Salud",
+                        content: "Profesionales de la salud visitan nuestras instalaciones - Conoce más aquí",
+                        date: "Febrero 20, 2025",
+                        userPost: false // 🔹 Estas publicaciones son fijas
+                    },
+                    {
+                        title: "Semilleros de investigación abiertos",
+                        content: "Inscribirse en el siguiente enlace - Conoce más aquí",
+                        date: "Febrero 25, 2025",
+                        userPost: false
+                    }
+                ];
+        
+                if (posts.length === 0) {
+                    posts = defaultPosts;
+                    localStorage.setItem("posts", JSON.stringify(posts)); // Guardamos las publicaciones predeterminadas
+                }
+        
+                // 🔹 Mostrar todas las publicaciones
+                posts.forEach((post, index) => {
+                    let postElement = document.createElement("div");
+                    postElement.classList.add("post-preview");
+                    postElement.innerHTML = `
+                        <h2 class="post-title">${post.title}</h2>
+                        <p class="post-subtitle">${post.content}</p>
+                        <p class="post-meta">Publicado el ${post.date}</p>
+                        ${post.userPost ? `<button class="btn btn-danger btn-sm" onclick="deletePost(${index})">Eliminar</button>` : ""}
+                        <hr class="my-4" />
+                    `;
+                    postsContainer.appendChild(postElement);
+                });
+            });
+        
+            function deletePost(index) {
+                if (confirm("¿Seguro que quieres eliminar esta publicación?")) {
+                    let posts = JSON.parse(localStorage.getItem("posts")) || [];
+                    if (!posts[index].userPost) return; // 🔹 Evita eliminar publicaciones fijas
+                    posts.splice(index, 1); // Elimina solo las publicaciones del usuario
+                    localStorage.setItem("posts", JSON.stringify(posts));
+                    location.reload(); // Recarga la página
+                }
+            }
+        </script>
         
     </body>
 </html>

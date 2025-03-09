@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <title>K-Social</title>
+        <link rel="icon" type="image/x-icon" href="assets/favoicon.png" />
+        <!-- Font Awesome icons -->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS -->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body>
+         <!-- Navigation-->
+         <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="index.html"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarResponsive">
+                    <ul class="navbar-nav py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Main</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">Acerca</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="propiaPublicacion.html">Haz tu propia Publicacion</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post.html">Publicaciones</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contacto</a></li>
+                    </ul>
+                </div>                
+            </div>
+        </nav>
+       <!-- Page Header-->
+       <header class="masthead" style="background-image: url('assets/img/bannerPropioPubli.jpg')">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="site-heading">
+                        <h1>Enviar Publicacion</h1>
+                        <span class="subheading">Comparte tu historia con la comunidad</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+        <!-- Main Content -->
+        <main class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-10 col-lg-8">
+                        <form id="publicationForm">
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="title" type="text" placeholder="Título de la publicación" required />
+                                <label for="title">Título</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <textarea class="form-control" id="content" placeholder="Contenido de la publicación" style="height: 12rem" required></textarea>
+                                <label for="content">Contenido</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="image" class="form-label">Imagen (opcional)</label>
+                                <input class="form-control" id="image" type="file" />
+                            </div>
+                            <button class="btn btn-primary" type="submit">Enviar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- Footer -->
+        <footer class="border-top">
+            <div class="container px-4 px-lg-5 text-center">
+                <p class="small text-muted">&copy; Vlog Konradista - 2025</p>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS -->
+        <script src="js/scripts.js"></script>
+        <script>
+            document.getElementById("publicationForm").addEventListener("submit", function(event) {
+                event.preventDefault(); // Evita que la página se recargue
+        
+                let title = document.getElementById("title").value;
+                let content = document.getElementById("content").value;
+        
+                let newPost = {
+                    title: title,
+                    content: content,
+                    date: new Date().toLocaleDateString(),
+                };
+        
+                // Obtener publicaciones anteriores y agregar la nueva
+                let posts = JSON.parse(localStorage.getItem("posts")) || [];
+                posts.push(newPost);
+                localStorage.setItem("posts", JSON.stringify(posts));
+        
+                // Redirigir a la página de publicaciones
+                window.location.href = "post.html";
+            });
+        </script>
+        
+    </body>
+</html>

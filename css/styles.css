@@ -11,6 +11,14 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 :root {
+  .perfil {
+    width: 100%; /* Ajusta al ancho del contenedor */
+    max-width: 480px; /* No más grande que 480px */
+    height: auto; /* Mantiene la proporción */
+    border-radius: 10px; /* Opcional: esquinas redondeadas */
+    object-fit: cover; /* Ajusta sin distorsionar */
+}
+
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
   --bs-purple: #6f42c1;
